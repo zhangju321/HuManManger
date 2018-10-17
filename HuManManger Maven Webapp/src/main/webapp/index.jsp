@@ -10,11 +10,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="左右结构项目，属于大人员的社交工具">
-        <meta name="keywords" content="左右结构项目 社交 占座 ">
+        <meta name="description" content="">
+        <meta name="keywords" content="人力资源管理系统 ">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="format-detection" content="telephone=no">
-        <title>Bootstrap左右结构响应式后台管理模板</title>
+        <title>人力资源管理系统</title>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
@@ -69,11 +69,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- 左侧菜单栏目块 -->
             <div class="leftMeun" id="leftMeun">
                 <div id="logoDiv">
-                    <p id="logoP"><img id="logo" alt="左右结构项目" src="images/logo.png"><span>左右结构项目</span></p>
+                    <p id="logoP"><img id="logo" alt="人力资源管理系统" src="images/logo.png"><span>人力资源管理系统</span></p>
                 </div>
                 <div id="personInfor">
-                    <p id="userName">杨鹏</p>
-                    <p><span>yangxp@qq.com</span> More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                    <p id="userName">张钜</p>
+                     
                     <p>
                         <a>退出登录</a>
                     </p>
@@ -1927,7 +1927,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
 -->
 <script src="js/jquery.nouislider.js"></script>
-
 <!-- this page specific inline scripts -->
 <script>
                                                 //min/max slider
