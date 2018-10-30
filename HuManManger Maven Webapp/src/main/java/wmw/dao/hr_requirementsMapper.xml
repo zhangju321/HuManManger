@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wmw.dao.hr_requirementsMapper" >
+  <select id="select" resultType="Map">
+    select * from hr_recruit_requirements
+  </select>
+  <resultMap id="BaseResultMap" type="wmw.entity.hr_requirements" >
+    <id column="REQUIREMENTS_ID" property="requirementsId" jdbcType="INTEGER" />
+    <result column="REQU_DEPT" property="requDept" jdbcType="VARCHAR" />
+    <result column="REQU_JOB" property="requJob" jdbcType="VARCHAR" />
+    <result column="REQU_NUM" property="requNum" jdbcType="INTEGER" />
+    <result column="REQU_REQUIRES" property="requRequires" jdbcType="VARCHAR" />
+    <result column="REQU_TIME" property="requTime" jdbcType="TIMESTAMP" />
+    <result column="PETITIONER" property="petitioner" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="wmw.entity.hr_requirements" extends="BaseResultMap" >
+    <result column="ATTACHMENT_NAME" property="attachmentName" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REQUIREMENTS_ID, REQU_DEPT, REQU_JOB, REQU_NUM, REQU_REQUIRES, REQU_TIME, PETITIONER, 
+    REMARK
+  </sql>
+  <sql id="Blob_Column_List" >
+    ATTACHMENT_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hr_recruit_requirements
+    where REQUIREMENTS_ID = #{requirementsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hr_recruit_requirements
+    where REQUIREMENTS_ID = #{requirementsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="wmw.entity.hr_requirements" >
+    insert into hr_recruit_requirements (REQUIREMENTS_ID, REQU_DEPT, REQU_JOB, 
+      REQU_NUM, REQU_REQUIRES, REQU_TIME, 
+      PETITIONER, REMARK, ATTACHMENT_NAME
+      )
+    values (#{requirementsId,jdbcType=INTEGER}, #{requDept,jdbcType=VARCHAR}, #{requJob,jdbcType=VARCHAR}, 
+      #{requNum,jdbcType=INTEGER}, #{requRequires,jdbcType=VARCHAR}, #{requTime,jdbcType=TIMESTAMP}, 
+      #{petitioner,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{attachmentName,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="wmw.entity.hr_requirements" >
+    insert into hr_recruit_requirements
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="requirementsId != null" >
+        REQUIREMENTS_ID,
+      </if>
+      <if test="requDept != null" >
+        REQU_DEPT,
+      </if>
+      <if test="requJob != null" >
+        REQU_JOB,
+      </if>
+      <if test="requNum != null" >
+        REQU_NUM,
+      </if>
+      <if test="requRequires != null" >
+        REQU_REQUIRES,
+      </if>
+      <if test="requTime != null" >
+        REQU_TIME,
+      </if>
+      <if test="petitioner != null" >
+        PETITIONER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="attachmentName != null" >
+        ATTACHMENT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="requirementsId != null" >
+        #{requirementsId,jdbcType=INTEGER},
+      </if>
+      <if test="requDept != null" >
+        #{requDept,jdbcType=VARCHAR},
+      </if>
+      <if test="requJob != null" >
+        #{requJob,jdbcType=VARCHAR},
+      </if>
+      <if test="requNum != null" >
+        #{requNum,jdbcType=INTEGER},
+      </if>
+      <if test="requRequires != null" >
+        #{requRequires,jdbcType=VARCHAR},
+      </if>
+      <if test="requTime != null" >
+        #{requTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="petitioner != null" >
+        #{petitioner,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentName != null" >
+        #{attachmentName,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="wmw.entity.hr_requirements" >
+    update hr_recruit_requirements
+    <set >
+      <if test="requDept != null" >
+        REQU_DEPT = #{requDept,jdbcType=VARCHAR},
+      </if>
+      <if test="requJob != null" >
+        REQU_JOB = #{requJob,jdbcType=VARCHAR},
+      </if>
+      <if test="requNum != null" >
+        REQU_NUM = #{requNum,jdbcType=INTEGER},
+      </if>
+      <if test="requRequires != null" >
+        REQU_REQUIRES = #{requRequires,jdbcType=VARCHAR},
+      </if>
+      <if test="requTime != null" >
+        REQU_TIME = #{requTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="petitioner != null" >
+        PETITIONER = #{petitioner,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentName != null" >
+        ATTACHMENT_NAME = #{attachmentName,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where REQUIREMENTS_ID = #{requirementsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="wmw.entity.hr_requirements" >
+    update hr_recruit_requirements
+    set REQU_DEPT = #{requDept,jdbcType=VARCHAR},
+      REQU_JOB = #{requJob,jdbcType=VARCHAR},
+      REQU_NUM = #{requNum,jdbcType=INTEGER},
+      REQU_REQUIRES = #{requRequires,jdbcType=VARCHAR},
+      REQU_TIME = #{requTime,jdbcType=TIMESTAMP},
+      PETITIONER = #{petitioner,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ATTACHMENT_NAME = #{attachmentName,jdbcType=LONGVARCHAR}
+    where REQUIREMENTS_ID = #{requirementsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="wmw.entity.hr_requirements" >
+    update hr_recruit_requirements
+    set REQU_DEPT = #{requDept,jdbcType=VARCHAR},
+      REQU_JOB = #{requJob,jdbcType=VARCHAR},
+      REQU_NUM = #{requNum,jdbcType=INTEGER},
+      REQU_REQUIRES = #{requRequires,jdbcType=VARCHAR},
+      REQU_TIME = #{requTime,jdbcType=TIMESTAMP},
+      PETITIONER = #{petitioner,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where REQUIREMENTS_ID = #{requirementsId,jdbcType=INTEGER}
+  </update>
+</mapper>
