@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zj.dao.springfestivalMapper">
+ <select id="sfFind" resultType="map">
+ select * from springfestival
+ </select>
+ <insert id="sfSave" parameterType="springfestival">
+ insert into springfestival(sfName,sfTime,sfTimeEnd) values(#{sfName},#{sfTime},#{sfTimeEnd})
+ </insert>
+ <delete id="sfDelete" parameterType="springfestival">
+ delete from springfestival where sfId=#{sfId}
+ </delete>
+ <update id="sfUpdate" parameterType="springfestival">
+ update springfestival set sfName=#{sfName},sfTime=#{sfTime},sfTimeEnd=#{sfTimeEnd} where sfId=#{sfId}
+ </update>
+ <select id="sfFindById" parameterType="int" resultType="springfestival">
+ select * from springfestival where sfId=#{sfId}
+ </select>
+</mapper>
