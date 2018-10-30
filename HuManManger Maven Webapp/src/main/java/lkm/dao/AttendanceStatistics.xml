@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lkm.dao.AttendanceStatistics" >
+  	<!-- 查询离职表 -->
+	<select id="selectas" resultType="map">
+		 select i.STAFF_NAME,i.*,t.*,v.*,r.*,o.*,COUNT(t.travel_id),count(v.vocation_id),count(r.work_id),count(o.out_id)
+         from staff_info i 
+         left JOIN travel t on t.staff_id=i.STAFF_ID
+         left join vocation v on v.staff_id=i.STAFF_ID
+         left join work_register r on r.staff_id=i.staff_id
+         left join hr_go_out o on o.staff_id=i.STAFF_ID
+         order by i.staff_id asc
+
+	</select>
+</mapper>
