@@ -15,10 +15,9 @@ public class staff_contractServiceImpl implements staff_contractService{
 	private staff_contractMapper mapper;
 
 	@Override
-	//添加和修改
+	//添加和修改 修改合同状态
 	public int insertandupdate(staff_contract contract) {
 		// TODO Auto-generated method stub
-
 		//判断是修改还是添加
 		if(contract.getContractId()!=0 && contract.getContractId()>0){
 			return mapper.update(contract);

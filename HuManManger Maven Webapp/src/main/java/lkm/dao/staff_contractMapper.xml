@@ -45,7 +45,7 @@
 
 	<!-- 查询合同 -->
 	<select id="selectcontract" resultType="map">
-		 select i.STAFF_NAME,c.*
+		 select i.STAFF_NAME,c.*,DATEDIFF(contract_end_time,now()) htdaoqi,DATEDIFF(trail_over_time,now()) sydaoqi
          from staff_contract c left JOIN staff_info i on c.STAFF_ID=i.staff_id
          order by c.CONTRACT_ID  asc
 	</select>

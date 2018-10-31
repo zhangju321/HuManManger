@@ -24,5 +24,14 @@ public class AttendanceStatisticsController {
 		List<Map<String,Object>> list=ser.selectas();
 		return list;
 	}
+    
+    //ÏêÏ¸ĞÅÏ¢
+    @RequestMapping("/Details")
+    @ResponseBody
+	public void Details(int staffid){
+    	System.out.println(staffid);
+           ser.Details(staffid);
+	}
+
 			
 }

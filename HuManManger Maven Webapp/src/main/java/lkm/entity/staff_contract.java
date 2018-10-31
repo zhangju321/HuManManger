@@ -41,7 +41,7 @@ public class staff_contract {
 
     private int removeOrNot;//合同是否解除
 
-    private String status;//合同状态
+    private int status;//合同状态
 
     private String signTimes;//签约次数
 
@@ -197,11 +197,11 @@ public class staff_contract {
 		this.removeOrNot = removeOrNot;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -324,6 +324,7 @@ public class staff_contract {
 	public void setContractRemoveTime(Date contractRemoveTime) {
 		this.contractRemoveTime = contractRemoveTime;
 	}
+
 
     
 

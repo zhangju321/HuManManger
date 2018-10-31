@@ -8,11 +8,11 @@ public class hr_go_out {//外出
 
     private String reason;
 
-    private String outTime;
+    private String outTime;//外出日期
 
-    private String startTime;
+    private String startTime;//开始时间
 
-    private String endTime;
+    private String endTime;//结束时间
 
     private String place;
 

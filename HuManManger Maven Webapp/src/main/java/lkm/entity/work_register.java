@@ -2,6 +2,8 @@ package lkm.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class work_register {//上班登记
     private int workId;
 
@@ -13,29 +15,30 @@ public class work_register {//上班登记
 
     private String registerType;
 
-    private String setTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date setTime;//规定时间
 
     private int registerIp;
 
-    private int attendanceShould;
+    private int attendanceShould;//应出勤
 
-    private int attendanceActual;
+    private int attendanceActual;//实际出勤
 
-    private int rest;
+    private int rest;//休息
 
-    private int absenteeism;
+    private int absenteeism;//旷工
 
-    private int late;
+    private int late;//迟到
 
-    private int workUnregistered;
+    private int workUnregistered;//上班未登记
 
-    private int earlyRetreat;
+    private int earlyRetreat;//早退
 
-    private int workOff;
+    private int workOff;//下班未登记
 
-    private String workTime;
+    private String workTime;//上班时间
 
-    private String workOfftime;
+    private String workOfftime;//下班时间
 
 	public int getWorkId() {
 		return workId;
@@ -77,11 +80,11 @@ public class work_register {//上班登记
 		this.registerType = registerType;
 	}
 
-	public String getSetTime() {
+	public Date getSetTime() {
 		return setTime;
 	}
 
-	public void setSetTime(String setTime) {
+	public void setSetTime(Date setTime) {
 		this.setTime = setTime;
 	}
 
@@ -172,6 +175,8 @@ public class work_register {//上班登记
 	public void setWorkOfftime(String workOfftime) {
 		this.workOfftime = workOfftime;
 	}
+
+	
 
 
 }

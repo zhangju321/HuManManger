@@ -2,6 +2,8 @@ package lkm.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class vocation {//Çë¼Ù
     private int vocationId;
 
@@ -9,9 +11,11 @@ public class vocation {//Çë¼Ù
 
     private String vocationReason;
 
-    private String vocationQiTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date vocationQiTime;//Çë¼ÙÆðÊ¼Ê±¼ä
 
-    private String vocationJieTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date vocationJieTime;//Çë¼Ù½ØÖ¹Ê±¼ä
 
     private String vocationType;
 
@@ -47,19 +51,19 @@ public class vocation {//Çë¼Ù
 		this.vocationReason = vocationReason;
 	}
 
-	public String getVocationQiTime() {
+	public Date getVocationQiTime() {
 		return vocationQiTime;
 	}
 
-	public void setVocationQiTime(String vocationQiTime) {
+	public void setVocationQiTime(Date vocationQiTime) {
 		this.vocationQiTime = vocationQiTime;
 	}
 
-	public String getVocationJieTime() {
+	public Date getVocationJieTime() {
 		return vocationJieTime;
 	}
 
-	public void setVocationJieTime(String vocationJieTime) {
+	public void setVocationJieTime(Date vocationJieTime) {
 		this.vocationJieTime = vocationJieTime;
 	}
 
@@ -102,6 +106,7 @@ public class vocation {//Çë¼Ù
 	public void setOperate(String operate) {
 		this.operate = operate;
 	}
+
 
  
 }

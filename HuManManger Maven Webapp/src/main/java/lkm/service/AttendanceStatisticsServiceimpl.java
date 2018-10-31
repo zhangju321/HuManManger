@@ -18,6 +18,20 @@ public class AttendanceStatisticsServiceimpl implements AttendanceStatisticsServ
 		// TODO Auto-generated method stub
 		return as.selectas();
 	}
+
+	@Override
+	public void Details(int staffid) {
+		//查询外出
+		as.selectout(staffid);
+		//查询出差
+		as.selecttra(staffid);
+		//查询上下班登记
+		as.selectreg(staffid);
+		//查询请假
+		as.selectvoc(staffid);
+		
+		
+	}
 	
 
 }

@@ -8,9 +8,9 @@ public class travel {//出差
 
     private String travelPlace;
 
-    private String startTime;
+    private String startTime;//开始时间
 
-    private String endTime;
+    private String endTime;//结束时间
 
     private int travelDate;
 

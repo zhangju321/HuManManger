@@ -10,7 +10,7 @@ import lkm.entity.staff_info;
 
 public interface staff_contractService {
 	@Transactional
-	//添加和修改
+	//添加和修改 修改合同状态
 	public int insertandupdate(staff_contract contract);
 	//删除
 	public int delete(int contractId);
