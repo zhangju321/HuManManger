@@ -42,15 +42,11 @@
 	<table class="table table-hover">
 		<thead>
 			<tr class="success">
-			<tr class="success">
-				<th>合同编号</th>
 				<th>员工姓名</th>
 				<th>签约公司</th>
 				<th>合同类型</th>
 				<th>合同签订日期</th>
 				<th>合同到期日期</th>
-				<th>合同剩余时间</th>
-				<th>试用剩余时间</th>
 				<th>操作</th>
 				<th><input type="button" data-toggle="modal"
 					data-target="#myModal" class="emptys btn btn-default" value="新建合同"></th>
@@ -101,13 +97,6 @@
                             
                             <div class="form-group">
                             
-                                <div class="col-lg-4">
-                                  <label>合同属性</label>
-										<select class="contractSpecialization form-control" id="contractSpecialization" name="contractSpecialization">
-										   <option value="1">固定期限</option>
-										   <option value="2">无固定期限</option>
-        	                            </select>
-								</div>
 								<div class="col-lg-4">
                                   <label>签约公司</label>
 										<select class="contractEnterpries form-control" id="contractEnterpries" name="contractEnterpries">
@@ -116,6 +105,20 @@
 								</div>
 								
                             </div>
+                            
+                            
+                           <div class="layui-inline">
+							<label>试用生效日期</label>
+							<div class="layui-input-inline">
+								<input class="layui-input" id="t3" name="trailEffectiveTime"
+									placeholder="试用生效日期" type="text">
+						    </div>
+						    <label>试用到期日期</label>
+							<div class="layui-input-inline">
+								<input class="layui-input" id="t4" name="trailOverTime"
+									placeholder="试用到期日期" type="text">
+						    </div>
+                          </div>
                             
                           <div class="layui-inline">
 							<label>合同签订日期</label>
@@ -130,31 +133,6 @@
 						    </div>
 						    
                           </div>
-                          <div class="layui-inline">
-							<label>试用生效日期</label>
-							<div class="layui-input-inline">
-								<input class="layui-input" id="t3" name="trailEffectiveTime"
-									placeholder="试用生效日期" type="text">
-						    </div>
-						    <label>试用到期日期</label>
-							<div class="layui-input-inline">
-								<input class="layui-input" id="t4" name="trailOverTime"
-									placeholder="试用到期日期" type="text">
-						    </div>
-                          </div>
-                          <div class="form-group">
-                       <div class="col-lg-4">
-                                  <label>试用期限</label>
-                                  <input type="text" id="probationaryPeriod" name="probationaryPeriod" class="form-control" placeholder="请输入">
-								</div>
-								<div class="col-lg-4">
-                                  <label>是否转正</label>
-                                        <select class="passOrNot form-control" id="passOrNot" name="passOrNot">
-        	                               <option value="1">是</option>
-        	                               <option value="2">否</option>
-        	                            </select>
-								</div>
-                            </div>
 							
 						<input type="button" id="insertorupdate" data-toggle='modal'
 							data-target='#myModal' class="btn btn-primary" value="保存">
@@ -195,15 +173,26 @@
 				$("#tbody").empty();
 				for (var i = 0; i < data.length; i++) {
 					var obj = data[i];
+					
+					var contype=null;
+					if(obj.CONTRACT_TYPE=1){
+					   contype="聘用合同"
+					}else if(obj.CONTRACT_TYPE=2){
+					   contype="兼职合同"
+					}else if(obj.CONTRACT_TYPE=3){
+					   contype="集体合同"
+					}
+					
+					
 					var tr = "<tr>";
-					tr += "<td>" + obj.CONTRACT_ID + "</td>"; //合同编号
+					tr += "<td style='display:none'>" + obj.CONTRACT_ID + "</td>"; //合同编号
 					tr += "<td id='name'>" + obj.STAFF_NAME + "</td>"; //员工姓名
 					tr += "<td>" + obj.CONTRACT_ENTERPRIES + "</td>"; //合同续签公司
-					tr += "<td>" + obj.CONTRACT_TYPE + "</td>"; //合同类型
+					tr += "<td>" + contype + "</td>"; //合同类型
 					tr += "<td>" + obj.MAKE_CONTRACT + "</td>"; //合同签订日期
 					tr += "<td>" + obj.CONTRACT_END_TIME + "</td>"; //合同到期日期
-					tr += "<td id='daoqi'>" + obj.htdaoqi + "</td>"; //合同剩余时间
-					tr += "<td id='daoqi'>" + obj.sydaoqi + "</td>"; //试用剩余时间
+					tr += "<td id='htdq' style='display:none'>" + obj.htdaoqi + "</td>"; //合同剩余时间
+					tr += "<td id='sydq' style='display:none'>" + obj.sydaoqi + "</td>"; //试用剩余时间
 					tr += "<td><input type='button' data-toggle='modal' data-target='#myModal' title=" + obj.CONTRACT_ID + "  class='selectByID btn btn-default' value='修改'></td>";
 					tr += "<td><input type='button' id=" + obj.CONTRACT_ID + "  class='delete btn btn-default' value='删除'></td>";
 					tr += "</tr>";
@@ -302,7 +291,20 @@
 	/*修改前查询  */
 	$(document).on("click", ".selectByID", function() {
 	
+	
 	 	var staffName=$(this).parent().parent().find("#name").html();
+	    //合同到期时间
+	 	var htdq=$(this).parent().parent().find("#htdq").html();
+	 	//试用到期时间
+	 	var sydq=$(this).parent().parent().find("#sydq").html();
+	 	if(sydq<0){
+	 	  alert(staffName+"试用已过期");
+	 	}
+	 	if(htdq<0){
+	 	  alert(staffName+"合同已过期");
+	 	}
+
+	
 	 	
 		$("#staffId").html("");//职务表外键 职务名称 
 		var id = this.title;

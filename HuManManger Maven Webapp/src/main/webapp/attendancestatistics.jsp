@@ -44,9 +44,13 @@
 			<tr class="success">
 				<th>员工姓名</th>
 				<th>外出次数</th>
-				<th>迟到次数</th>
 				<th>出差次数</th>
 				<th>请假次数</th>
+				<th>应出勤（天）</th>
+				<th>实际出勤（天）</th>
+				<th>休息（次）</th>
+				<th>旷工（次）</th>
+				<th>迟到(次)</th>
 				<!-- <th>操作</th> -->
 			</tr>
 		</thead>
@@ -82,9 +86,13 @@
 					var tr = "<tr>";
 					tr += "<td>" + obj.STAFF_NAME + "</td>"; //员工姓名
 					tr += "<td>" + obj.co + "</td>"; //外出次数 
-					tr += "<td>" + obj.cr + "</td>"; //迟到次数 
 					tr += "<td>" + obj.ct + "</td>"; //出差次数
 					tr += "<td>" + obj.cv + "</td>"; //请假次数 
+					tr += "<td>" + obj.attendance_should + "</td>"; //应出勤 
+					tr += "<td>" + obj.attendance_actual + "</td>"; //实际出勤 
+					tr += "<td>" + obj.rest + "</td>"; //休息
+					tr += "<td>" + obj.absenteeism + "</td>"; //旷工
+					tr += "<td>" + obj.late + "</td>"; //迟到
 			        /* tr += "<td><input type='button'  title=" + obj.staff_id + "  data-toggle='modal' data-target='#myModal' class='Details btn btn-default' value='详细信息'></td>";				
 					 */tr += "</tr>";
 					$("#tbody").append(tr);
