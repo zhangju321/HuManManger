@@ -87,7 +87,14 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis.spring.version}</version>
 		</dependency>
-
+        
+         <!-- pagehelper分页插件 -->
+         <dependency>
+           <groupId>com.github.pagehelper</groupId>
+           <artifactId>pagehelper</artifactId>
+           <version>5.1.2</version>
+         </dependency>
+         
 		<!-- MySql -->
 		<dependency>
 			<groupId>mysql</groupId>

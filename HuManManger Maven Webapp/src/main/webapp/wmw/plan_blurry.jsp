@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	 <p>招聘计划审批</p>
      <ul class="nav nav-tabs">
+     <li class="active"><a href="/HuManManger/wmw/plan_blurry.jsp">审批招聘计划</a></li>
 	  <li><a onclick="queryzero()">未办理</a></li>
 	  <li><a onclick="queryone()">已批准</a></li>
 	  <li><a onclick="querytwo()">未批准</a></li>
@@ -51,7 +52,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  $(function(){
 	    queryzero();
 	 })
-	 
 function queryzero(){
         var id=0;
 		$.ajax({

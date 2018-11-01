@@ -26,9 +26,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	 <p>招聘计划</p>
      <ul class="nav nav-tabs">
-	  <li class="active"><a href="/HuManManger/wmw/plan_select.jsp">招聘计划</a></li>
+	  <li class="active"><a href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a></li>
 	  <li><a href="/HuManManger/wmw/plan_save.jsp">创建招聘计划</a></li>
-	  <li><a href="#">招聘计划查询</a></li>
+	  <li><a href="/HuManManger/wmw/plan_select.jsp">招聘计划查询</a></li>
     </ul>
 
 <div id="none_select">
@@ -81,7 +81,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td nowrap class="col-md-2 control-label">招聘渠道:</td>
 							<td class="TableData">
-							   <input type="text" name="planDitch" class="form-control" id="PLAN_DITCH">
+							   <select name="planDitch" style="background: white;" class="form-control" > 
+					              <option value="">请选择</option>
+		                		  <option value="1">网络招聘</option>
+                                  <option value="2">招聘会招聘</option>
+                                  <option value="3">人才猎头推荐</option>
+		                        </select>
 							</td>
 							<td nowrap class="col-md-2 control-label">预算费用:</td>
 							<td class="TableData">
@@ -165,7 +170,9 @@ function queryAll(){
         		    tr+="<td>"+data[i].END_DATE+"</td>";
         		    tr+="<td>"+data[i].WORK_DATE+"</td>"; 
         		    tr+="<td>"+status(data[i].PLAN_STATUS)+"</td>";
-        		    tr+="<td><input type='button' id='"+data[i].PLAN_NO+"' value='修改' href='#plan_modal' data-toggle='modal' class='update  btn btn-primary' ><input type='button' id='"+data[i].PLAN_NO+"' value='删除'  class='delete btn btn-primary'></td>"; 
+        		    tr+="<td><input type='button' id='"+data[i].PLAN_NO+"' value='修改' href='#plan_modal' data-toggle='modal' class='update  btn btn-primary' >"+
+        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='删除'  class='delete btn btn-primary'>"+
+        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='详细信息'  class='details btn btn-primary'></td>"; 
         		    tr+="</tr>";
         		     $("#plan_tbody").append(tr); 
         	}}
@@ -198,7 +205,8 @@ function queryAll(){
 							$("#RECRUIT_DEPT").val(data[0].RECRUIT_DEPT);
 							$("#RECRUIT_POSITION").val(data[0].RECRUIT_POSITION);
 							$("#PLAN_RECR_NO").val(data[0].PLAN_RECR_NO);
-							$("#PLAN_DITCH").val(data[0].PLAN_DITCH);
+/* 							$("#PLAN_DITCH").val(data[0].PLAN_DITCH);
+ */							document.getElementById("#PLAN_DITCH")[data[0].PLAN_DITCH].selected=true;
 							$("#PLAN_BCWS").val(data[0].PLAN_BCWS);
 							$("#START_DATE").val(data[0].START_DATE);
 							$("#END_DATE").val(data[0].END_DATE);
@@ -243,4 +251,33 @@ function queryAll(){
 					});
 				})
 			})
+			/*详细信息*/
+			$(function(){
+				$("#plan_tbody").on("click",".details",function(){
+					var id=this.id;
+					$.ajax({
+						url:"plan/queryId",
+						type:"post",
+						async:true,
+						contentType:"application/json;charset=utf-8",
+						data:JSON.stringify(id),
+						dataType: 'Json',
+						success:function(data){
+						
+						}
+					});
+				})
+			})
+			/* 设置下拉框 */
+			function selectValue(sId,value){  
+    var s = document.getElementById(sId);  
+    var ops = s.options;  
+    for(var i=0;i<ops.length; i++){  
+        var tempValue = ops[i].value;  
+        if(tempValue == value)  
+        {  
+            ops[i].selected = true;  
+        }  
+    }  
+}
 </script>

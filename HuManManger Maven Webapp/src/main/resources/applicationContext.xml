@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 
-	<context:component-scan base-package="wmw"></context:component-scan>
+	<context:component-scan base-package="zj"></context:component-scan>
 	
 	<!-- 数据源 -->
 <!-- 加载属性文件 -->
@@ -32,14 +32,24 @@
 	<!-- 配置SqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property><!--  注入数据源 -->
-		<property name="mapperLocations" value="classpath:wmw/dao/*.xml"></property> <!--  自动扫描mapper映射文件 -->
-		<property name="typeAliasesPackage" value="wmw.entity"></property> 
+		<property name="mapperLocations" value="classpath:zj/dao/*.xml"></property> <!--  自动扫描mapper映射文件 -->
+		<property name="typeAliasesPackage" value="zj.entity"></property> 
+		<!-- 分页配置 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>helperDialect=mysql</value>
+                    </property>
+                </bean>
+            </array>
+          </property>
 		<!-- <property name="configLocation" value="classpath:mybatis-config.xml"></property> -->
 	</bean>
 	
 	<!-- 配置扫描dao接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="wmw.dao"></property> <!-- 指定dao接口所在的包 -->
+		<property name="basePackage" value="zj.dao"></property> <!-- 指定dao接口所在的包 -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 	
@@ -47,6 +57,7 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-
+    
+        
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

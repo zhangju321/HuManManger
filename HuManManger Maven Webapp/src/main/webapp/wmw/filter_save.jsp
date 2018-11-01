@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <ul class="nav nav-tabs">
 	  <li><a href="/HuManManger/wmw/filter_select.jsp">人才筛选管理</a></li>
 	  <li class="active"><a href="/HuManManger/wmw/filter_save.jsp">创建筛选计划</a></li>
-	  <li><a href="#">筛选计划查询</a></li>
+	  <li><a href="/HuManManger/wmw/filter_select.jsp">人才筛选查询</a></li>
     </ul>
 	<!-- 添加招聘筛选 -->
 <div style="width:1000px" class="col-md-4 control-label">
@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	   data :obj,
 	           dataType:'text',
         	   success : function(data) {
-        	      alert("创建成功");
+        	      alert("创建筛选成功");
         	}  
  		}); 
 	 }

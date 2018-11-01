@@ -24,46 +24,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css">
 </head>
 <body>
-    
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			 <a id="modal-362493" href="#modal-container-362493" role="button" class="btn" data-toggle="modal">触发遮罩窗体</a>
-			
-			<div class="modal fade" id="modal-container-362493" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title" id="myModalLabel">
-								标题
-							</h4>
-						</div>
-						<div class="modal-body">
-							内容...
-						</div>
-						<div class="modal-footer">
-							 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="button" class="btn btn-primary">保存</button>
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-			
-		</div>
-	</div>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#selectFilterName">开始演示模态框</button>
+    <!-- 模态框（Modal） -->
+<div class="modal fade" id="selectFilterName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+            </div>
+            <div class="modal-body">
+                <table>
+                   <tbody id="filterName"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
 </body>
 </html>
-
-
-
-
-<!-- <script>
-
- 		
-  $(function(){
-	    queryAll();
-	 })
-</script> -->
+<script>
+    $('#selectFilterName').on('show.bs.modal', function () {
+        $.ajax({
+        	url : "recru/QueryFilter",
+        	type : "post",
+        	async : true,
+        	contentType: "application/json; charset=utf-8",
+       	 	dataType : 'json', 
+        	success : function(data) {
+           		$("#selectFilterName").html("");
+        		 for(var i=0; i<data.length;i++){
+        		    var tr="<tr>";
+        		    tr+="<td >"+data[i].EMPLOYEE_NAME+"</td>";
+        		    tr+="</tr>";
+        		     $("#selectFilterName").append(tr); 
+        	}}
+ 		}); 
+     })
+</script>

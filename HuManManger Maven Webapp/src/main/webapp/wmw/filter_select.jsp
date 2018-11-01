@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <ul class="nav nav-tabs">
 	  <li class="active"><a href="/HuManManger/wmw/filter_select.jsp">人才筛选管理</a></li>
 	  <li><a href="/HuManManger/wmw/filter_save.jsp">创建筛选计划</a></li>
-	  <li><a href="#">筛选计划查询</a></li>
+	  <li><a href="/HuManManger/wmw/filter_select.jsp">人才筛选查询</a></li>
     </ul>
 <!-- 筛选计划查询 -->
 <div  style="width:1300px">
@@ -119,12 +119,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		
-		
-		
-		
-		
-		
-		
 <!-- 第一次面试模态框 -->
 <div class="modal fade" id="filterOne_modal" role="dialog" style="overflow:scroll;"aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:700px"><!-- auto -->
@@ -151,6 +145,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		     <tbody id="filterOne_Infor"></tbody>
 		   </table>
 		</form>
+		<!-- 第二次筛选信息 -->
+		<form action="" id="filterTwo_InforForm" style="display:none">
+		   <table>
+		     <tbody id="filterTwo_Infor"></tbody>
+		   </table>
+		</form>
 		<!-- 第一次筛选form -->
 		<form method="post" id="filterOne_FilterForm" >
 		<table class="Table" width="50%" align="center" >
@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td>
 			     <input type="hidden"name=filterId  id="filterOne" class="form-control">
 			     <input type="hidden"name="stepFlag"  id="stepFlag1" value="1" class="form-control">
-			     <input type="hidden"name="endFlag"  id="endFlag1" class="form-control">
+			     <input type="hidden"name="endFlag"  id="endFlag1"  class="form-control">
 			</td>
 			</tr>
 			<tr>
@@ -214,8 +214,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <table>
 		     <tr>
 		        <td>
-		        <button type="button" class="btn btn-primary" style="display:none" id="filterOne_next" data-dismiss="modal"onclick="filterClose_One(0,1)">下一步骤</button>
-			    <button type="button" class="btn btn-default" data-dismiss="modal"onclick="filterClose_One(1,1)">结束筛选</button>
+		        <button type="button" class="btn btn-primary" style="display:none" id="filterOne_next" data-dismiss="modal"onclick="filterClose_One(1,1)">下一步骤</button>
+			    <button type="button" class="btn btn-default" data-dismiss="modal"onclick="filterClose_One(2,1)">结束筛选</button>
 		        </td>
 		     </tr>
 		  </table>
@@ -283,8 +283,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <table>
 		     <tr>
 		        <td>
-		        <button type="button" class="btn btn-primary" style="display:none" id="filterTwo_next" data-dismiss="modal"onclick="filterClose_One(0,2)">下一步骤</button>
-			    <button type="button" class="btn btn-default" data-dismiss="modal"onclick="filterClose_One(1,2)">结束筛选</button>
+		        <button type="button" class="btn btn-primary" style="display:none" id="filterTwo_next" data-dismiss="modal"onclick="filterClose_One(1,2)">下一步骤</button>
+			    <button type="button" class="btn btn-default" data-dismiss="modal"onclick="filterClose_One(2,2)">结束筛选</button>
 		        </td>
 		     </tr>
 		  </table>
@@ -321,7 +321,7 @@ function filterSelect(){
         		    tr+="<td>"+data[i].TRANSACTOR_STEP+"</td>";
         		     var filter_step=data[i].FILTER_ID+","+data[i].STEP_FLAG;
         		    /* alert(filter_step);  */
-        		    if(data[i].END_FLAG==0){
+        		    if(data[i].END_FLAG==0 || data[i].END_FLAG==1){
         		    tr+="<td>"+
         		    "<input type='button' id='"+data[i].FILTER_ID+"' value='修改' href='#filterUpdate_modal' data-toggle='modal' class='update btn btn-primary'>"+
         		    "<input type='button' id='"+data[i].FILTER_ID+"' value='删除' class='delete btn btn-primary'>"+
@@ -439,17 +439,23 @@ function filterSelect(){
  					 /* 根据步骤编号判断*/
 					if(filterStep==0){
 					/*第一次筛选   查询人员信息*/
-					        $("#filterOne").val(filter_Id);
 					        filter_SelectInfor(filter_Id);
   	                        $('#filterOne_modal').modal('show');
   	                        document.getElementById("filterOne_FilterForm").style.display='none';
   	                        document.getElementById("filterTwo_FilterForm").style.display='none';
   	                }else if(filterStep==1){
-  	                /*第二次筛选   查询人员信息(0) ，查询第一次筛选信息，并显示(a)，调用第二次筛选模态框*/
-  	                        $("#filterTwo").val(filter_Id);
   	                        filter_SelectInfor(filter_Id);
   	                        filterOne_SelectInfor(filter_Id);
   	                        document.getElementById("filterOne_InforForm").style.display='';/* 显示第一次筛选信息 */
+  	                        document.getElementById("filterOne_FilterForm").style.display='none';/* 隐藏第一次筛选 */
+  	                        document.getElementById("filterTwo_FilterForm").style.display='none';/* 隐藏第二次筛选 */
+  	                        $('#filterOne_modal').modal('show');
+  	                }else if(filterStep==2){
+  	                        filter_SelectInfor(filter_Id);
+  	                        filterOne_SelectInfor(filter_Id);
+  	                        filterTwo_SelectInfor(filter_Id);
+  	                        document.getElementById("filterOne_InforForm").style.display='';/* 显示第一次筛选信息 */
+  	                        document.getElementById("filterTwo_InforForm").style.display='';
   	                        document.getElementById("filterOne_FilterForm").style.display='none';/* 隐藏第一次筛选 */
   	                        document.getElementById("filterTwo_FilterForm").style.display='none';/* 隐藏第二次筛选 */
   	                        $('#filterOne_modal').modal('show');
@@ -469,6 +475,7 @@ function filterSelect(){
 						success:function(data){
 						$("#filter_Infor").html("");
 				        $("#filterOne_Infor").html("");
+				        $("#filterTwo_Infor").html("");
 						    var tr="<tr>";
         		            tr+="<td>应聘者姓名：</td><td>"+data[0].EMPLOYEE_NAME+"</td><td>招聘计划：</td><td>"+data[0].PLAN_NAME+"</td>";
         		            tr+="</tr>";
@@ -545,6 +552,36 @@ function filterSelect(){
 					});
 	 }
 	  
+	  	/* 第二次筛选信息查询 */
+	function filterTwo_SelectInfor(filter_Id){
+                   $.ajax({
+						url:"filter/filterId",
+						type:"post",
+						async:true,
+						contentType:"application/json;charset=utf-8",
+						data:JSON.stringify(filter_Id),
+						dataType: 'Json',
+						success:function(data){
+				           $("#filterTwo_Infor").html("");
+						    var tr="<tr>";
+						    tr+="<td align='center' class='TableControl' colspan=4 nowrap><p>第二次筛选信息</p></td>";
+        		            tr+="</tr>";
+        		            tr+="<td>复选方式：</td><td>"+data[0].FILTER_METHOD2+"</td><td>复选时间：</td><td>"+data[0].FILTER_DATE_TIME2+"</td>";
+        		            tr+="</tr>";
+        		            tr+="<tr>";
+        		            tr+="<td>复选内容：</td><td>"+data[0].FIRST_CONTENT2+"</td><td>复选意见：</td><td>"+data[0].FIRST_VIEW2+"</td>";
+        		            tr+="</tr>";
+        		            tr+="<tr>";
+        		            tr+="<td>复选办理人：</td><td>"+data[0].TRANSACTOR_STEP2+"</td><td>复选是否通过：</td><td>"+data[0].PASS_OR_NOT2+"</td>";        		            
+        		            tr+="</tr>";
+        		            tr+="<tr>";
+        		            tr+="<td>复选下一步办理人：</td><td>"+data[0].NEXT_TRANSA_STEP2+"</td><td>复选下步筛选时间：</td><td>"+data[0].NEXT_DATE_TIME2+"</td>";
+        		            tr+="</tr>";
+        		            $("#filterTwo_Infor").append(tr); 
+						}
+					});
+	 }
+	  
 	 
 	 
 	 
@@ -552,21 +589,21 @@ function filterSelect(){
 	 /* 结束筛选判断按钮 */
 	function filterClose_One(end,step){
 	       if(step==1){
-	          if (end==0)
+	          if (end==1)
 	       {/* 继续筛选 */
-		       $("#endFlag1").val(0);
+		       $("#endFlag1").val(1);
 		       filterOne_Update();
 	       }else{/* 结束筛选 */
-		       $("#endFlag1").val(1);
+		       $("#endFlag1").val(2);
 		       filterOne_Update();
            } 
 	       }else if(step==2){
-	           if (end==0)
+	           if (end==1)
 	       {/* 继续筛选 */
-		       $("#endFlag2").val(0);
+		       $("#endFlag2").val(1);
 		       filterTwo_Update();
 	       }else{/* 结束筛选 */
-		       $("#endFlag2").val(1);
+		       $("#endFlag2").val(2);
 		       filterTwo_Update();
            }}
            }

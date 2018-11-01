@@ -28,11 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <p>招聘计划</p>
      <ul class="nav nav-tabs">
-	  <li><a href="/HuManManger/wmw/plan_select.jsp">招聘计划</a></li>
+	  <li><a href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a></li>
 	  <li class="active"><a href="/HuManManger/wmw/plan_save.jsp">创建招聘计划</a></li>
-	  <li><a href="#">招聘计划查询</a></li>
+	  <li><a href="/HuManManger/wmw/plan_select.jsp">招聘计划查询</a></li>
     </ul>
 <!-- 添加招聘计划 -->
+<div>
 <form method="post"  id="plansave">
 <table class="Table" width="60%" align="center">
 <tr align="center" class="TableControl">
@@ -63,7 +64,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <tr>
       <td nowrap class="col-md-2 control-label">招聘渠道:</td>
       <td class="TableData">
-         <input type="text" name="planDitch" class="form-control" >
+         <select name="planDitch" style="background: white;" class="form-control" > 
+					<option value="">请选择</option>
+					<option value="1">网络招聘</option>
+                    <option value="2">招聘会招聘</option>
+                    <option value="3">人才猎头推荐</option>
+		 </select> 
       </td>
       <td nowrap class="col-md-2 control-label">预算费用:</td>
       <td class="TableData">
@@ -103,11 +109,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <tr>
       <td nowrap class="col-md-2 control-label">招聘说明:</td>
       <td class="TableData">
-         <input type="text" name="recruitDirection" class="form-control"  >
+         <textarea class="form-control" rows="3" name="recruitDirection" ></textarea>
       </td>
+    </tr>
+    <tr>
       <td nowrap class="col-md-2 control-label">招聘备注:</td>
       <td class="TableData">
-        <input type="text"name="recruitRemark" class="form-control" >
+        <textarea class="form-control" rows="3" name="recruitRemark" ></textarea>
       </td>
    </tr>
    <tr>
@@ -123,19 +131,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
   </table>
 </form>
+</div>
   </body>
 </html>
 <script>
     function plan_save(){
 			var obj=$("#plansave").serialize();
-			alert(obj);
 		    $.ajax({
 		       url : "plan/planSave",
         	   type : "post",
         	   data :obj,
 	           dataType:'json',
         	   success : function(data) {
-        	      alert("123");
+        	   alert("创建招聘计划成功");
         	}
  		}); 
 	 }

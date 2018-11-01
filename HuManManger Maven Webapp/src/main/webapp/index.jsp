@@ -81,9 +81,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a>退出登录</a>
 				</p>
 			</div>
-			<div class="meun-title">账号管理</div>
-			<div class="meun-item meun-item-active" href="#sour"
-				aria-controls="sour" role="tab" data-toggle="tab">
+			<div class="meun-title">招聘管理</div>
+			<div class="meun-item meun-item-active" href="#sour"aria-controls="sour" role="tab" data-toggle="tab">
 				<img src="images/icon_source.png">资源管理
 			</div>
 			<div class="meun-item" href="#char" aria-controls="char" role="tab"
